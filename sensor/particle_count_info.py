@@ -16,12 +16,12 @@ class ParticleData(HouseInfo):
         recs = super().get_data_by_date("particulate", rec_date)
         return self._convert_data(recs)
 
-    def get_data_concentration(self, data):
+    def get_data_concentrations(self, data):
         particulate = {"good": 0, "moderate": 0, "bad": 0}
         for rec in data:
-            if float(rec) < 50.0:
+            if rec <= 50.0:
                 particulate["good"] += 1
-            elif (float(rec) > 50.0) and (float(rec) <= 100.0):
+            elif rec > 50.0 and rec <= 100.0:
                 particulate["moderate"] += 1
             else:
                 particulate["bad"] += 1
